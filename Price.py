@@ -1,15 +1,49 @@
 import streamlit as st
 import pandas as pd
 
-# Load the cleaned data
-@st.cache_data(ttl=600)  # Refresh data every 10 minutes
+# Directly input the cleaned data as a DataFrame
 def load_data():
-    try:
-        data = pd.read_csv('/Users/user/Desktop/VSCode/cleaned_pricing_data.csv')  # Ensure correct path
-        return data
-    except FileNotFoundError:
-        st.error("CSV file not found. Please check the file path.")
-        return None
+    # Define the data as a dictionary
+    data_dict = {
+        "Port": [
+            "Fuzhou FZG", "Fuzhou FZG", "Jiujiang JIU", "Ningbo NBG", 
+            "Ningbo NBG", "Qingdao QDG", "Qingdao QDG", "Tianjin Xingang TXG", 
+            "Xiamen XMG", "Yantian YTN / Shenzhen", "Yantian YTN / Shenzhen", 
+            "Haiphong HPH", "Haiphong HPH"
+        ],
+        "Container Size": [
+            "20GP", "40HC", "20GP", "20GP", "40HC", 
+            "20GP", "40HC", "20GP", "20GP", "20GP", 
+            "40HC", "20GP", "40HC"
+        ],
+        "Volume (m3)": [
+            28, 68, 28, 28, 68, 
+            28, 68, 28, 28, 28, 
+            68, 28, 68
+        ],
+        "Price": [
+            5379.186622625929, 9706.878612716762, 5443.257638315441, 
+            5167.665152766309, 9178.693228736582, 5167.665152766309, 
+            9261.269611890999, 4892.072667217176, 4892.072667217176, 
+            5057.793146160198, 9003.358794384807, 4485.402559867878, 
+            7857.584640792733
+        ],
+        "Price per m3": [
+            192.11380795092603, 142.74821489289357, 194.40205851126575, 
+            184.55946974165388, 134.98078277553796, 184.55946974165388, 
+            136.1951413513382, 174.716881, 174.716881, 180.63546950572137, 
+            132.40233521154127, 160.19294856670993, 115.55271530577548
+        ],
+        "Product Type": [
+            "Dawn Sofa", "Dining Table", "Dining Chair", "Occasional Chair", 
+            "Coffee Table", "Dali Bowl", "Hudson Mug", "Dyne Sofa", 
+            None, None, None, None, None
+        ]
+    }
+    
+    # Create a DataFrame
+    data = pd.DataFrame(data_dict)
+    return data
 
 # Conversion rate (USD to NZD)
 USD_TO_NZD = 1.66  # Example rate, adjust as needed
