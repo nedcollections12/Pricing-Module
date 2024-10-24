@@ -116,11 +116,11 @@ def main():
         shipping_cost_per_m3 = container_price / container_volume
         freight_cost_for_product = shipping_cost_per_m3 * product_volume
 
-        # Total landed cost in USD (price + freight cost)
-        total_landed_cost_usd = product_price_usd + freight_cost_for_product
+         # Convert product price from USD to NZD
+        product_price_nzd = product_price_usd * USD_TO_NZD
 
-        # Convert to NZD
-        total_landed_cost_nzd = total_landed_cost_usd * USD_TO_NZD
+        # Total landed cost in NZD (price + freight cost)
+        total_landed_cost_nzd = product_price_nzd + freight_cost_for_product_nzd
 
         st.success(f"The estimated landed cost for a product the same size as {selected_product_type} in NZD is: ${total_landed_cost_nzd:.2f}")
     else:
